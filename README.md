@@ -269,10 +269,9 @@ Upload `submission_tuned.csv` (or `submission_majority.csv`) to the BBDC 2026 Su
 
 No external datasets were used. However, the original training data was lightly modified based on findings from data exploration:
 
-- **SDG 3 under-representation:** During exploration, a significant number of SDG 3 example cases were found in the training set, yet the model consistently struggled to predict this class. To address this, several training samples were replaced with **annotated examples that include explicit reasoning**, making the label signal clearer for the model.
-- **Annotated example integration:** Additional high-quality cases were sourced from the provided annotated examples file and merged into the training set to improve rare-class coverage.
+- **Annotated example integration:** During exploration, a significant number of SDG 3 example cases were found in the training set, yet the model consistently struggled to predict this class. To address this, several training samples were replaced with **annotated examples that include explicit reasoning**, making the label signal clearer for the model. Additional high-quality cases were sourced from the provided annotated examples file and merged into the training set to improve rare-class coverage.
 - **Modified training data:** The updated training dataset is included in this repository as **`train.zip`**.
 
-> **Note on model selection:** The initial submission — which briefly held first place on the leaderboard — used **GPT-OSS 120B**. The final and best-performing submission switched to **Gemini 3.1 Pro**, with many new additional ideas, a natural evolution of first solution.
+- **Note on model selection:** The initial submission — which briefly held first place on the leaderboard — used **GPT-OSS 120B**. The final and best-performing submission switched to **Gemini 3.1 Pro**, with many new additional ideas, a natural evolution of first solution.
 
 Thank you for organizing this competition, we learned a lot and it made our summer gap fun and productive.

@@ -9,8 +9,8 @@ This repository contains my best solution for the **Bremen Big Data Challenge (B
 ## Table of Contents
 
 - [Dual-Agent Architecture](#dual-agent-architecture)
-- [Agent 1: The Analyst Agent (The Ruleset Generator)](#agent-1-the-analyst-agent-the-ruleset-generator)
-- [Agent 2: The Classifier Agent (The Forecaster)](#agent-2-the-classifier-agent-the-forecaster)
+- [Agent 1: The Analyst Agent](#agent-1-the-analyst-agent)
+- [Agent 2: The Classifier Agent](#agent-2-the-classifier-agent)
 - [Robust 2-Fold Validation](#robust-2-fold-validation)
 - [Architecture Diagram](#architecture-diagram)
 - [How to Reproduce](#how-to-reproduce)
@@ -34,7 +34,7 @@ Rather than a monolithic pipeline, this solution decomposes the classification p
 
 ---
 
-## Agent 1: The Analyst Agent (The Ruleset Generator)
+## Agent 1: The Analyst Agent 
 
 The Analyst Agent is responsible for **distilling the entire training corpus into compact, actionable knowledge**. It does not classify documents directly — instead, it produces three knowledge artifacts that the Classifier Agent consumes.
 
@@ -64,7 +64,7 @@ The Analyst also performs a **grid search** over candidate thresholds per SDG to
 
 ---
 
-## Agent 2: The Classifier Agent (The Forecaster)
+## Agent 2: The Classifier Agent 
 
 The Classifier Agent is a **pure inference engine**. It does not learn from training data directly — all knowledge is received from the Analyst Agent via the Reference Library, Ruleset, and Thresholds.
 

@@ -574,7 +574,7 @@ Respond ONLY with the JSON dictionary."""
 
     def _create_context_cache(self, ref_docs, micro_ruleset, display_name="sdg-context"):
         """
-        Create a Gemini context cache from the static prefix (parts 1-3).
+        Create a context cache from the static prefix (parts 1-3).
         This avoids re-processing the same ~100k+ tokens for every document.
         """
         static_prefix = self._build_static_prefix(ref_docs, micro_ruleset)

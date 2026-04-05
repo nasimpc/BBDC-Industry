@@ -50,19 +50,17 @@ A **greedy set-cover algorithm** selects the minimal subset of training document
 
 ### 1.2 Classification Ruleset Generation (`generate_ruleset`)
 
-The remaining ~75 training documents (not in the Reference Library) are fed to the LLM to **generate a comprehensive classification guide** (the "micro-ruleset"). The Analyst specifically instructs the LLM to produce:
+The remaining ~75 training documents (not in the Reference Library) are fed to the LLM to create compressed ruleset for Multi-Label SDG Classification. Here we are trying to learn and encode the information in a markdown file for the Classifier Agent.
 
-1. **Rare SDG Detailed Analysis (60% of output):** For SDG2, SDG5, SDG6, SDG14, SDG15, SDG17 — exhaustive German keyword lists, context patterns, trigger explanations, and negative indicators
-2. **Confusing SDG Pair Disambiguation:** Rules to distinguish SDG7 vs SDG13, SDG9 vs SDG11, SDG3 vs SDG8, SDG6 vs SDG14
-3. **Multi-Label Co-occurrence Patterns:** Common label combinations with concrete examples
-4. **Zero-Label Indicators:** Patterns for documents addressing no SDGs
-5. **Hard Case Rules:** Specific distinguishing criteria for SDG3 and SDG8
+The ruleset along with fewshot examples showed a most significant improvement in the F1-score of the model.
 
-The ruleset is cached to disk (`micro_ruleset.md`) to avoid regeneration on subsequent runs.
 
-### 1.3 Per-SDG Threshold Tuning (`tune_thresholds`)
+### 1.3 Note on Analyst Agent
 
-Instead of a fixed 0.5 majority threshold, the Analyst performs a **grid search** over candidate thresholds `[0.0, 0.32, 0.34, 0.5, 0.66, 0.67, 1.0]` per SDG to find the threshold that maximizes F1-score on validation data. The tuned thresholds are saved to `optimal_thresholds.json`.
+One future scope is to use Loop and critic pattern in the analyst agent, so the agent can improve itself based on the performance of the classifier agent on validation data.
+
+The Analyst also performs a **grid search** over candidate thresholds per SDG to find the threshold that maximizes F1-score on validation data. How ever this step did not showed any perfomance gain in full test data prediction.
+
 
 ---
 
@@ -75,14 +73,13 @@ The Classifier Agent is a **pure inference engine**. It does not learn from trai
 The prompt is structured in two parts:
 
 **Static Prefix (cached, ~100k+ tokens):**
-1. System instructions with all 17 SDG definitions
-2. Rare SDG detection guidance with hardcoded German keyword lists for SDG6, SDG15, SDG17
-3. Full-text Reference Library with labeled examples
-4. Generated Classification Ruleset (disambiguation rules)
+1. System instructions with all 17 SDG definitions.
+2. Rare SDG detection guidance.
+3. Few shot examples
+4. Generated Classification Ruleset(ruleset.md)
 
 **Dynamic Suffix (per-document):**
-5. Target document text
-6. Explicit 6-point checklist forcing the model to verify rare SDG triggers before answering
+Target document text and explicit 6-point checklist forcing the model to verify rare SDG triggers before answering
 
 ### 2.2 Context Caching
 

@@ -40,7 +40,7 @@ except ImportError:
 # ─────────────────────────────────────────────────────────────
 # Configuration
 # ─────────────────────────────────────────────────────────────
-VALIDATION_MODE = False  # Toggle: True for 2-split validation (50/50), False for Full Normal Prediction Mode
+VALIDATION_MODE = True  # Toggle: True for 2-split validation (50/50), False for Full Normal Prediction Mode
 NUM_VOTES = 3            # Number of self-consistency voting runs per document
 DRIVE_BACKUP_DIR = "/content/drive/MyDrive/Colab"  # Google Drive backup path
 RESUME_FROM_DOC = 0    # Skip docs before this number (set to 0 or None to disable)
@@ -83,7 +83,7 @@ def save_to_drive(local_path):
 
 
 def get_gemini_client():
-    PROJECT_ID = "[your-project-id]"
+    PROJECT_ID = "bbdc-491514"
     if not PROJECT_ID or PROJECT_ID == "[your-project-id]":
         PROJECT_ID = str(os.environ.get("GOOGLE_CLOUD_PROJECT"))
 
@@ -993,7 +993,7 @@ def main():
         print("\n--- RUNNING IN FULL PREDICTION MODE ---")
 
         # ── Agent 1: Analyst produces knowledge from all training data ──
-        ref_docs, micro_ruleset = analyst.run()
+        ref_docs, micro_ruleset = analyst.run(labels_df)
 
         test_skeleton_file = "test_skeleton.csv"
         if not os.path.exists(test_skeleton_file):

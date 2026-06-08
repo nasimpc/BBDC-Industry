@@ -83,7 +83,7 @@ Target document text and explicit 6-point checklist forcing the model to verify 
 
 ### 2.2 Context Caching
 
-The static prefix is uploaded once via Gemini's `CachedContent` API and reused across all 1,400+ predictions. This reduces per-call token costs by **>90%** and avoids re-processing ~100k tokens for every document.
+The static prefix is uploaded once via `CachedContent` API and reused across all 1,400+ predictions. This reduces per-call token costs by **>90%** and avoids re-processing ~100k tokens for every document.
 
 ### 2.3 Self-Consistency Majority Voting
 
@@ -165,7 +165,7 @@ The performance of the solution on validation runs was consistent with leaderboa
 │              AGENT 2 — The Classifier Agent                 │
 │              (The Forecaster)                               │
 │                                                             │
-│  Static Prompt Prefix (cached via Gemini API):              │
+│  Static Prompt Prefix (cached via LLM API):              │
 │  ┌──────────────────────────────────────────┐               │
 │  │ 1. System Instructions + SDG Definitions │               │
 │  │ 2. Rare SDG Detection Guidance           │               │
